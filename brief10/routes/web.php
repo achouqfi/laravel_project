@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MoviesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +17,13 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('homeDash');
 });
 
 
 Route::get('/login', [App\Http\Controllers\HomeController::class, 'index'])->name('login');
+
+Route::get('/movie',[App\Http\Controllers\MoviesController::class, 'index']);
+
+

@@ -24,6 +24,9 @@ Route::get('/', function () {
 
 Route::get('/login', [App\Http\Controllers\HomeController::class, 'index'])->name('login');
 
-Route::get('/movie',[App\Http\Controllers\MoviesController::class, 'index']);
-
-
+Route::get('/listMovie', 'App\Http\Controllers\MoviesController@index');
+Route::get('/movie/create', 'App\Http\Controllers\MoviesController@create');
+Route::post('/insert', 'App\Http\Controllers\MoviesController@store');
+Route::get('/movie/{id}/edit', 'App\Http\Controllers\MoviesController@edit');
+Route::put('/movie/{id}', 'App\Http\Controllers\MoviesController@update');
+Route::delete('/movie/{id}', 'App\Http\Controllers\MoviesController@descroy');

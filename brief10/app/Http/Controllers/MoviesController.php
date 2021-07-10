@@ -25,12 +25,19 @@ class MoviesController extends Controller
     public function store(Request $request)
     {
         //
-        // return $request->All();
-        // dd("im in store");
+
         $Movie = new movies();
         $Movie -> author = $request -> author;
         $Movie -> title =  $request -> title;
-        $Movie -> photo =  $request -> file;
+        // $Movie -> photo =  $request -> file;()
+        // if($request->hasFile("file")){
+            $file = $request->file;
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . ".".$ext ;
+            $filepath = "storage/images/";
+            $file->move($filepath,$filename);
+            $Movie->photo = $filepath.$filename;
+        // }
         $Movie -> description =  $request -> description;
 
         $Movie ->save();
@@ -41,26 +48,41 @@ class MoviesController extends Controller
     }
 
    
-    public function show(movies $movies)
+    public function show($id)
     {
         //
+
     }
 
     public function edit($id)
     {
         //
         $movie = movies::find($id);
-        return view('movie.edit',["movie"=>$movie]);
+        return view('movie.',["movie"=>$movie]);
     }
 
  
-    public function update(Request $request, movies $movies)
+    public function update(Request $request, $id)
     {
         //
+        $movie =movies::find($id);
+        $movie -> author = $request -> author;
+        $movie -> title =  $request -> title;
+        $movie -> photo =  $request -> photo;
+        $movie -> description =  $request -> description;
+
+        $movie ->save();
+
+        return redirect("listMovie");
     }
 
-    public function destroy(movies $movies)
+    public function destroy(Request $request, $id)
     {
         //
+        $movie =movies::find($id);
+        $movie->delete();
+
+        return redirect("listMovie");
+
     }
 }

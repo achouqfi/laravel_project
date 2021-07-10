@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class movies extends Model
 {
     use HasFactory;
+
+    public function commentaires(){
+        return $this->hasMany("App/Models/Comment")->get();
+    }
 }

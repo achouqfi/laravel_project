@@ -1,6 +1,6 @@
 
 
-    <form action="{{ url('insert') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ url('insert') }}" method="POST">
         @csrf
         <input type="author" name="author">
         <input type="title" name="title">

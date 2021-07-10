@@ -53,11 +53,15 @@
             <td> {{ $movie->id }}</td>
             <td> {{ $movie->author }}</td>
             <td> {{ $movie->title }}</td>
-            <td> {{ $movie->photo }}</td>
+            <td><img  src="{{ asset($movie->photo) }}" height="40px" /></td>
             <td> {{ $movie->description }}</td>
             <td>
-                <a href="{{ yrl('movie/'.$cv->id.'/edit') }}" class="btn btn-primary">Edit</a>
-                <a href="" class="btn btn-danger">Supprimer</a>
+                <form action="{{ url('movie/'.$movie->id) }}" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <a href="{{ url('movie/'.$movie->id.'/edit') }}" class="btn btn-primary">Edit</a>
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
             </td>
         </tr>
             
